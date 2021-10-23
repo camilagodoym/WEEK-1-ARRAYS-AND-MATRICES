@@ -1,0 +1,25 @@
+// ASSIGNMENT 1 INDICIES.cpp : This file contains the 'main' function. Program execution begins and ends there.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int numbers[5] = { 7, 5, -6, 12, 35 };
+    int len = (sizeof(numbers) / sizeof(numbers[0])-1);
+    int x, y, soma;
+
+    cout << "Enter the target number ";
+    cin >> y;
+    x = 0;
+    while (x < len){
+        soma = numbers[x] + numbers[x+1];
+        //cout << soma << " ";
+        if (soma == y) {
+            cout << " "<< x <<" "<< x + 1 << " ";
+        }   
+        ++x;
+    }
+     
+    return 0;
+
+}
