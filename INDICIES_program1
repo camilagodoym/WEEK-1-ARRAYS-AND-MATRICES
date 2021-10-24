@@ -4,16 +4,44 @@
 using namespace std;
 
 int main() {
-    int numbers[5] = { 7, 5, -6, 12, 35 };
+    //defining values
+    int s=5;
+    int numbers[s];
+    cout<<"Insert element "<<s<<" elemets for this matrix: " <<endl;
+    //user enters the S values defined
+    for(int z=0; z < s; z++){
+        cout<<"Insert element "<<z<<":";
+            //cout<<"S:"<<s << "  ";
+            //cout<<"Z"<<z << "  ";
+        cin>>numbers[z];//cout<<"array "<<numbers[z]<< "";
+    
+    }
+    
+    //lopping tru the array to see if any number was entered twice
+    for (int i = 0; i < s; ++ i)
+        for (int j = i + 1; j < s; j++)
+            if (numbers[i] == numbers[j]) {
+                std::cout << "Invalid entry, do not repeat values\n"
+                             "Enter " <<s<< " integers with no repeated values:\n";
+                return true;
+            }
+    //return false;
+    
+    for(int z=0; z < s; z++){
+    //calculating the len of the array
     int len = (sizeof(numbers) / sizeof(numbers[0])-1);
     int x, y, soma;
-
+    //cout << len;
+     //requesting target number
     cout << "Enter the target number ";
     cin >> y;
+    
     x = 0;
     while (x < len){
+        //sum of the values in each position [x+ (x+1)]
         soma = numbers[x] + numbers[x+1];
         //cout << soma << " ";
+        //printing the position where found target number equals soma
         if (soma == y) {
             cout << " "<< x <<" "<< x + 1 << " ";
         }   
@@ -23,3 +51,8 @@ int main() {
     return 0;
 
 }
+}
+
+
+
+
