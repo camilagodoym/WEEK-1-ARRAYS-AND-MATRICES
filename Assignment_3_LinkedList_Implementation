@@ -1,0 +1,100 @@
+// Implement a LinkedList Implementation for Sparse Matrices as described above.
+
+#include<iostream>
+using namespace std;
+
+// Link list starts with creating a new Node
+//this is a node class that will be used tru the code
+class Node
+{
+public:
+	int data;
+	Node* next;
+	int row;
+	int column;
+};
+
+
+// Define a Function add a new node
+void add_node(Node** p, int x, int row_position, int col_position)
+{
+	Node* temp = *p;
+	Node* n;
+
+	// when linklist is empty we need to create new node node and assign values
+	if (temp == NULL)
+	{
+		temp = new Node();
+		temp->row = row_position;
+		temp->column = col_position;
+		temp->data = x;
+		temp->next = NULL;
+		*p = temp;
+	}
+
+	// when link list is already created we need to append new node
+	else
+	{
+		while (temp->next != NULL)
+			temp = temp->next;
+
+		n = new Node();
+		n->row = row_position;
+		n->column = col_position;
+		n->data = x;
+		n->next = NULL;
+		temp->next = n;
+	}
+}
+
+
+// printing the list
+void printList(Node* start)
+{
+	cout << " Node Structure: [Row][Colunm][Value][Address of nex node]" << endl;
+
+	Node* prt = start;
+
+	cout << endl;
+	while (prt != NULL)
+	{
+		cout << "[" << prt->data << "]";
+		cout << "[" << prt->row << "]";
+		cout << "[" << prt->column << "]";
+		cout << "[ ] ";
+		cout << "->";
+		prt = prt->next;
+	}
+
+	cout << " NULL" << endl;
+
+}
+
+int main()
+{
+	// origial matrix defined
+	int SM[4][5] =
+	{
+		{0 , 0 , 3 , 0 , 4 },
+		{0 , 0 , 5 , 7 , 0 },
+		{0 , 0 , 0 , 0 , 0 },
+		{0 , 2 , 6 , 0 , 0 }
+	};
+
+	// Creating head node = NULL
+	Node* head = NULL;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			// if value <> 0
+			if (SM[i][j] != 0)
+				add_node(&head, i, j,
+					SM[i][j]);
+		}
+	}
+	printList(head);
+
+	return 0;
+}
+
