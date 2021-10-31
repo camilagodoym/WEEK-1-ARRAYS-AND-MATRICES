@@ -1,69 +1,89 @@
-// Implement a LinkedList Implementation for Sparse Matrices as described above.
+
+// C++ program for sparse matrix representation, using Link list
 
 #include<iostream>
 using namespace std;
 
-// Link list starts with creating a new Node
-//this is a node class that will be used tru the code
-class Node
+// origial matrix defined
+int SM[4][5] =
 {
-public:
-	int data;
-	Node* next;
-	int row;
-	int column;
+	{0 , 0 , 3 , 0 , 4 },
+	{0 , 0 , 5 , 7 , 0 },
+	{0 , 0 , 0 , 0 , 0 },
+	{0 , 2 , 6 , 0 , 0 }
 };
 
 
-// Define a Function add a new node
-void add_node(Node** p, int x, int row_position, int col_position)
+class Node
+{
+public:
+	Node* next;
+	int row;
+	int column;
+	int data;
+};
+
+
+// Define a Function add a new node with row, column, value
+//values for this function comes from the main body when value is not 0
+void addNode(Node** p, int rowPosition,  int colPosition, int value )
 {
 	Node* temp = *p;
 	Node* n;
 
-	// when linklist is empty we need to create new node node and assign values
+	// if value is empty, this is the start of the linklist
 	if (temp == NULL)
 	{
 		temp = new Node();
-		temp->row = row_position;
-		temp->column = col_position;
-		temp->data = x;
+		temp->row = rowPosition;
+		temp->column = colPosition;
+		temp->data = value;
 		temp->next = NULL;
 		*p = temp;
+		/*cout << "temp->row " << temp->row << endl;
+		cout << "temp->column " << temp->column << endl;
+		cout << "temp->data " << temp->data << endl;
+		cout << "temp->next " << temp->next << endl;
+		cout << "*p " << *p << endl;*/
 	}
 
-	// when link list is already created we need to append new node
+	// when it is not empty we need to append vappend consecutive values
 	else
 	{
 		while (temp->next != NULL)
 			temp = temp->next;
 
 		n = new Node();
-		n->row = row_position;
-		n->column = col_position;
-		n->data = x;
+		n->row = rowPosition;
+		n->column = colPosition;
+		n->data = value;
 		n->next = NULL;
 		temp->next = n;
+		/*cout << "temp->row " << temp->row << endl;
+		cout << "temp->column " << temp->column << endl;
+		cout << "temp->data " << temp->data << endl;
+		cout << "temp->next " << temp->next << endl; */
 	}
 }
 
 
-// printing the list
+
 void printList(Node* start)
 {
-	cout << " Node Structure: [Row][Colunm][Value][Address of nex node]" << endl;
+	cout << " Node Structure: [Row][Colunm][Value][Next node]" << endl;
 
-	Node* prt = start;
+	Node* listLink = start;
 
 	cout << endl;
-	while (prt != NULL)
+	while (listLink != NULL)
 	{
-		cout << "[" << prt->data << "]";
-		cout << "[" << prt->row << "]";
-		cout << "[" << prt->column << "]";
-		cout << "[ ] ";
+		
+		cout << "[" << listLink->row << "]";
+		cout << "[" << listLink->column << "]";
+		cout << "[" << listLink->data << "]";
+		cout << "["<< listLink-> next<<"] ";
 		cout << "->";
-		prt = prt->next;
+		listLink = listLink->next;
 	}
 
 	cout << " NULL" << endl;
@@ -72,27 +92,22 @@ void printList(Node* start)
 
 int main()
 {
-	// origial matrix defined
-	int SM[4][5] =
-	{
-		{0 , 0 , 3 , 0 , 4 },
-		{0 , 0 , 5 , 7 , 0 },
-		{0 , 0 , 0 , 0 , 0 },
-		{0 , 2 , 6 , 0 , 0 }
-	};
-
+	
 	// Creating head node = NULL
 	Node* head = NULL;
+
+	//evaluating if number id bigger than 0 to create the array
+	//if it is, it calls the addNode funtion with head, rowI,colunmJ, and value for position SM[i][j]
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 5; j++)
 		{
-			// if value <> 0
-			if (SM[i][j] != 0)
-				add_node(&head, i, j,
-					SM[i][j]);
+			
+			if (SM[i][j] != 0)//if value in the matrix position is not 0
+				addNode(&head, i, j,SM[i][j]); // call function addNode
 		}
 	}
+	
 	printList(head);
 
 	return 0;
