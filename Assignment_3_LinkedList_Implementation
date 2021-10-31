@@ -1,6 +1,4 @@
 
-// C++ program for sparse matrix representation, using Link list
-
 #include<iostream>
 using namespace std;
 
