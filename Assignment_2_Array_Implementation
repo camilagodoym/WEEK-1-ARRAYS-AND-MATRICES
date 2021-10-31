@@ -7,43 +7,46 @@ int main()
     // origial matrix defined
     int SM[4][5] =
     {
-        {0 , 0 , 0 , 0 , 2},
-        {0 , 2 , 0 , 0 , 0},
-        {2 , 0 , 0 , 2 , 0},
-        {0 , 0 , 2 , 0 , 0},
-       
+        {0 , 0 , 3 , 0 , 4 },
+        {0 , 0 , 5 , 7 , 0 },
+        {0 , 0 , 0 , 0 , 0 },
+        {0 , 2 , 6 , 0 , 0 }
+
     };
 
     // Calculate the total numbers bigger than 0
+    //this will give os the amount of columns we will have in the result of this array matrix
     int size = 0;
-    for (int row = 0; row < 4; ++row){
-        for (int column = 0; column < 5; ++column){
+    for (int row = 0; row < 4; ++row) {
+        for (int column = 0; column < 5; ++column) {
             if (SM[row][column] != 0)
-                size=size+1;
+                size = size + 1;
         }
     }
     cout << "Total numbers bigger than 0: " << size << endl;
-    // creating the array matrix with the numbers of calculated non- zeros
+    // defining the final array. the values for row will always be 3 and column=size
     int FM[3][size];
 
-    cout << "Original matrix: "<< endl;
-    int x, y, count;    
+    cout << "Original matrix: " << endl;
+    int x, y, count;
     for (x = 0; x < 4; x++)
-        {
-            cout << "\n";
-            for (y = 0; y < 5; y++)
-            cout << " "<< SM[x][y];
-            
-        }
-    
-     cout << "\n";
+    {
+        cout << "\n";
+        for (y = 0; y < 5; y++)
+            cout << " " << SM[x][y];
+
+    }
+
+    cout << "\n";
 
     // Generating result matrix
     int i = 0;
     for (int row = 0; row < 4; row++)
         for (int column = 0; column < 5; column++)
+            //values from original matrix that has 0 needs to be skiped
             if (SM[row][column] != 0)
             {
+                //row1,comunm2,value3
                 FM[0][i] = row;
                 FM[1][i] = column;
                 FM[2][i] = SM[row][column];
@@ -51,13 +54,13 @@ int main()
             }
 
     cout << "\n";
-    cout<<"Array Representation : "<<endl;
-    for (int row=0; row<3; row++)
+    cout << "Array Representation : " << endl;
+    for (int row = 0; row < 3; row++)
     {
-        for (int column = 0; column<size; column++)
-            cout<<FM[row][column]<<" ";
+        for (int column = 0; column < size; column++)
+            cout << FM[row][column] << " ";
 
-        cout<<endl;
+        cout << endl;
     }
     return 0;
 }
